@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Veo 3 Prompt Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar for better aesthetics in dark mode */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: #1f2937; /* gray-800 */
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: #374151; /* gray-700 */
+            border-radius: 4px;
+            border: 2px solid #1f2937; /* gray-800 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4 sm:p-6">
+
+    <div class="bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-4xl border border-gray-700 animate-fade-in">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-cyan-400">Advanced Veo 3 Prompt Generator</h1>
+            <p class="text-gray-400 mt-2">Rancang prompt video sinematik dengan struktur naratif yang lengkap.</p>
+        </div>
+
+        <!-- Form Inputs Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <!-- Column 1 -->
+            <div class="space-y-6">
+                <div>
+                    <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">1. Subjek</label>
+                    <input type="text" id="subject" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition" placeholder="Contoh: seorang astronot tua">
+                </div>
+                <div>
+                    <label for="action" class="block text-sm font-medium text-gray-300 mb-2">2. Aksi</label>
+                    <input type="text" id="action" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition" placeholder="Contoh: melihat ke luar jendela pesawat">
+                </div>
+                <div>
+                    <label for="expression" class="block text-sm font-medium text-gray-300 mb-2">3. Ekspresi</label>
+                    <input type="text" id="expression" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition" placeholder="Contoh: wajah rindu dan penuh kenangan">
+                </div>
+                <div>
+                    <label for="place" class="block text-sm font-medium text-gray-300 mb-2">4. Tempat</label>
+                    <input type="text" id="place" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition" placeholder="Contoh: di dalam kabin pesawat luar angkasa">
+                </div>
+                 <div>
+                    <label for="time" class="block text-sm font-medium text-gray-300 mb-2">5. Waktu</label>
+                    <select id="time" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition">
+                        <option value="pagi hari" data-en="morning">Pagi Hari</option>
+                        <option value="siang hari" data-en="daytime">Siang Hari</option>
+                        <option value="sore hari" data-en="afternoon">Sore Hari</option>
+                        <option value="saat matahari terbenam (golden hour)" data-en="during sunset (golden hour)">Senja (Golden Hour)</option>
+                        <option value="malam hari" data-en="night">Malam Hari</option>
+                        <option value="tengah malam" data-en="midnight">Tengah Malam</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="camera_movement" class="block text-sm font-medium text-gray-300 mb-2">6. Gerakan Kamera</label>
+                    <select id="camera_movement" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition">
+                        <option value="Static" data-en="Static">Static (Statis)</option>
+                        <option value="Zoom In" data-en="Zoom In">Zoom In (Perbesar)</option>
+                        <option value="Zoom Out" data-en="Zoom Out">Zoom Out (Perkecil)</option>
+                        <option value="Dolly Zoom" data-en="Dolly Zoom">Dolly Zoom (Efek Vertigo)</option>
+                        <option value="Pan Left" data-en="Pan Left">Pan Left (Geser Kiri)</option>
+                        <option value="Pan Right" data-en="Pan Right">Pan Right (Geser Kanan)</option>
+                        <option value="Tilt Up" data-en="Tilt Up">Tilt Up (Mendongak ke Atas)</option>
+                        <option value="Tilt Down" data-en="Tilt Down">Tilt Down (Menunduk ke Bawah)</option>
+                        <option value="Dolly In" data-en="Dolly In">Dolly In (Maju Mendekat)</option>
+                        <option value="Dolly Out" data-en="Dolly Out">Dolly Out (Mundur Menjauh)</option>
+                        <option value="Tracking Shot" data-en="Tracking Shot">Tracking Shot (Mengikuti Objek)</option>
+                        <option value="Roll Left" data-en="Roll Left">Roll Left (Bergulir Kiri)</option>
+                        <option value="Roll Right" data-en="Roll Right">Roll Right (Bergulir Kanan)</option>
+                        <option value="3D Rotation" data-en="3D Rotation">3D Rotation (Rotasi 3D)</option>
+                        <option value="Aerial View" data-en="Aerial View">Aerial View (Tampak Atas)</option>
+                        <option value="First-person View" data-en="First-person View">First-person View (Sudut Pandang Orang Pertama)</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Column 2 -->
+            <div class="space-y-6">
+                <div>
+                    <label for="lighting" class="block text-sm font-medium text-gray-300 mb-2">7. Pencahayaan</label>
+                    <select id="lighting" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition">
+                        <option value="cahaya alami yang lembut" data-en="soft natural light">Cahaya Alami Lembut</option>
+                        <option value="sinar matahari yang terik" data-en="harsh sunlight">Sinar Matahari Terik</option>
+                        <option value="pencahayaan studio profesional" data-en="professional studio lighting">Pencahayaan Studio</option>
+                        <option value="pencahayaan dramatis dengan bayangan tajam" data-en="dramatic lighting with sharp shadows">Pencahayaan Dramatis</option>
+                        <option value="lampu neon berwarna-warni" data-en="colorful neon lighting">Lampu Neon</option>
+                        <option value="cahaya bulan yang temaram" data-en="dim moonlight">Cahaya Bulan</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="video_style" class="block text-sm font-medium text-gray-300 mb-2">8. Gaya Video</label>
+                    <select id="video_style" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition">
+                        <option value="sinematik dan fotorealistik" data-en="cinematic and photorealistic">Sinematik & Fotorealistik</option>
+                        <option value="gaya anime" data-en="anime style">Gaya Anime</option>
+                        <option value="render 3D" data-en="3D render">Render 3D</option>
+                        <option value="gaya dokumenter" data-en="documentary style">Gaya Dokumenter</option>
+                        <option value="rekaman film 35mm vintage" data-en="vintage 35mm film footage">Rekaman Film 35mm</option>
+                        <option value="rekaman drone" data-en="drone footage">Rekaman Drone</option>
+                        <option value="hitam putih" data-en="black and white">Hitam Putih</option>
+                    </select>
+                </div>
+                 <div>
+                    <label for="video_mood" class="block text-sm font-medium text-gray-300 mb-2">9. Suasana Video</label>
+                    <select id="video_mood" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition">
+                        <option value="epik dan megah" data-en="epic and grand">Epik & Megah</option>
+                        <option value="tenang dan damai" data-en="calm and peaceful">Tenang & Damai</option>
+                        <option value="ceria dan optimis" data-en="cheerful and optimistic">Ceria & Optimis</option>
+                        <option value="tegang dan menegangkan" data-en="tense and suspenseful">Tegang & Menegangkan</option>
+                        <option value="sedih dan melankolis" data-en="sad and melancholic">Sedih & Melankolis</option>
+                        <option value="misterius dan gelap" data-en="mysterious and dark">Misterius & Gelap</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sound" class="block text-sm font-medium text-gray-300 mb-2">10. Suara atau Musik</label>
+                    <input type="text" id="sound" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition" placeholder="Contoh: alunan piano melankolis dan suara statis radio">
+                </div>
+                <div>
+                    <label for="speech" class="block text-sm font-medium text-gray-300 mb-2">11. Kalimat yang Diucapkan</label>
+                    <input type="text" id="speech" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition" placeholder="Contoh: Aku rindu rumah...">
+                </div>
+                <div>
+                    <label for="details" class="block text-sm font-medium text-gray-300 mb-2">12. Detail Tambahan</label>
+                    <input type="text" id="details" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none transition" placeholder="Contoh: 8K, sangat detail, cinematic color grading">
+                </div>
+            </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="mt-8">
+            <button id="generateBtn" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105 shadow-lg">
+                Buat Prompt
+            </button>
+        </div>
+
+        <!-- Output Area -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <div>
+                <label for="outputId" class="block text-sm font-medium text-gray-300 mb-2">Prompt Bahasa Indonesia (Bisa Diedit)</label>
+                <textarea id="outputId" rows="8" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-gray-300 focus:ring-2 focus:ring-cyan-500 focus:outline-none" placeholder="Hasil prompt dalam Bahasa Indonesia akan muncul di sini..."></textarea>
+            </div>
+            <div>
+                <label for="outputEn" class="block text-sm font-medium text-gray-300 mb-2">Final Prompt (English)</label>
+                <div class="relative">
+                    <textarea id="outputEn" rows="8" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-gray-300 focus:ring-2 focus:ring-cyan-500 focus:outline-none" readonly placeholder="Final prompt in English will appear here..."></textarea>
+                    <button id="copyBtn" class="absolute top-3 right-3 bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-1 px-3 rounded-md text-sm transition">
+                        Salin
+                    </button>
+                </div>
+                 <div id="copySuccess" class="text-green-400 text-sm mt-2 text-center" style="display: none;">
+                    Prompt berhasil disalin!
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- DOM Element References ---
+        const inputs = {
+            subject: document.getElementById('subject'),
+            action: document.getElementById('action'),
+            expression: document.getElementById('expression'),
+            place: document.getElementById('place'),
+            time: document.getElementById('time'),
+            camera_movement: document.getElementById('camera_movement'),
+            lighting: document.getElementById('lighting'),
+            video_style: document.getElementById('video_style'),
+            video_mood: document.getElementById('video_mood'),
+            sound: document.getElementById('sound'),
+            speech: document.getElementById('speech'),
+            details: document.getElementById('details'),
+        };
+        const generateBtn = document.getElementById('generateBtn');
+        const outputIdTextarea = document.getElementById('outputId');
+        const outputEnTextarea = document.getElementById('outputEn');
+        const copyBtn = document.getElementById('copyBtn');
+        const copySuccessMessage = document.getElementById('copySuccess');
+
+        /**
+         * Retrieves the English translation from a select element's chosen option.
+         * @param {HTMLSelectElement} selectElement - The select element.
+         * @returns {string} The English text from the data-en attribute.
+         */
+        function getSelectedEnText(selectElement) {
+            return selectElement.options[selectElement.selectedIndex].dataset.en;
+        }
+
+        /**
+         * Generates prompts in both Indonesian and English based on user inputs.
+         */
+        function generatePrompt() {
+            // --- Get Indonesian Values ---
+            const idValues = {
+                subject: inputs.subject.value.trim(),
+                action: inputs.action.value.trim(),
+                expression: inputs.expression.value.trim(),
+                place: inputs.place.value.trim(),
+                time: inputs.time.value,
+                camera_movement: inputs.camera_movement.value,
+                lighting: inputs.lighting.value,
+                video_style: inputs.video_style.value,
+                video_mood: inputs.video_mood.value,
+                sound: inputs.sound.value.trim(),
+                speech: inputs.speech.value.trim(),
+                details: inputs.details.value.trim(),
+            };
+
+            // --- Get English Values ---
+            const enValues = {
+                subject: idValues.subject, // Direct copy
+                action: idValues.action,
+                expression: idValues.expression,
+                place: idValues.place,
+                time: getSelectedEnText(inputs.time),
+                camera_movement: getSelectedEnText(inputs.camera_movement),
+                lighting: getSelectedEnText(inputs.lighting),
+                video_style: getSelectedEnText(inputs.video_style),
+                video_mood: getSelectedEnText(inputs.video_mood),
+                sound: idValues.sound,
+                speech: idValues.speech, // Not translated
+                details: idValues.details,
+            };
+            
+            // --- Validate Subject ---
+            if (!idValues.subject) {
+                outputIdTextarea.value = "Harap masukkan 'Subjek' terlebih dahulu untuk membuat prompt.";
+                outputEnTextarea.value = "Please enter a 'Subject' first to create a prompt.";
+                return;
+            }
+
+            // --- Construct Indonesian Prompt ---
+            let idPrompt = `Sebuah video dengan gaya ${idValues.video_style} yang menciptakan suasana ${idValues.video_mood}. `;
+            idPrompt += `Adegan menampilkan ${idValues.subject}`;
+            if (idValues.action) idPrompt += ` yang sedang ${idValues.action}`;
+            if (idValues.expression) idPrompt += ` dengan ekspresi ${idValues.expression}`;
+            if (idValues.place) idPrompt += `, berlatar di ${idValues.place}`;
+            if (idValues.time) idPrompt += ` pada ${idValues.time}`;
+            idPrompt += `. `;
+            if (idValues.camera_movement) idPrompt += `Kamera bergerak dengan teknik ${idValues.camera_movement}. `;
+            if (idValues.lighting) idPrompt += `Pencahayaan menggunakan ${idValues.lighting}. `;
+            if (idValues.sound) idPrompt += `Diiringi dengan suara ${idValues.sound}. `;
+            if (idValues.speech) idPrompt += `Terdengar kalimat yang diucapkan: "${idValues.speech}". `;
+            if (idValues.details) idPrompt += `Detail tambahan: ${idValues.details}.`;
+
+            // --- Construct English Prompt ---
+            let enPrompt = `A ${enValues.video_style} video creating a ${enValues.video_mood} atmosphere. `;
+            enPrompt += `The scene features ${enValues.subject}`;
+            if (enValues.action) enPrompt += ` who is ${enValues.action}`;
+            if (enValues.expression) enPrompt += ` with a ${enValues.expression} expression`;
+            if (enValues.place) enPrompt += `, set in ${enValues.place}`;
+            if (enValues.time) enPrompt += ` during the ${enValues.time}`;
+            enPrompt += `. `;
+            if (enValues.camera_movement) enPrompt += `The camera moves with a ${enValues.camera_movement} technique. `;
+            if (enValues.lighting) enPrompt += `The lighting uses ${enValues.lighting}. `;
+            if (enValues.sound) enPrompt += `Accompanied by the sound of ${enValues.sound}. `;
+            if (enValues.speech) enPrompt += `The spoken line is: "${enValues.speech}". `; // Speech is not translated
+            if (enValues.details) enPrompt += `Additional details: ${enValues.details}.`;
+
+            // --- Display Prompts ---
+            outputIdTextarea.value = idPrompt.replace(/\s+/g, ' ').trim();
+            outputEnTextarea.value = enPrompt.replace(/\s+/g, ' ').trim();
+        }
+
+        /**
+         * Copies the English prompt to the clipboard.
+         */
+        function copyPrompt() {
+            const textToCopy = outputEnTextarea.value;
+            if (!textToCopy || textToCopy.startsWith("Please")) {
+                return;
+            }
+
+            outputEnTextarea.select();
+            outputEnTextarea.setSelectionRange(0, 99999); 
+
+            try {
+                document.execCommand('copy');
+                copyBtn.textContent = 'Disalin!';
+                copySuccessMessage.style.display = 'block';
+
+                setTimeout(() => {
+                    copyBtn.textContent = 'Salin';
+                    copySuccessMessage.style.display = 'none';
+                }, 2000);
+
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                copySuccessMessage.textContent = 'Gagal menyalin.';
+                copySuccessMessage.style.color = '#ef4444'; // red-500
+                copySuccessMessage.style.display = 'block';
+            }
+            
+            window.getSelection().removeAllRanges();
+        }
+
+        // --- Event Listeners ---
+        generateBtn.addEventListener('click', generatePrompt);
+        copyBtn.addEventListener('click', copyPrompt);
+
+    </script>
+
+</body>
+</html>
